@@ -8,8 +8,8 @@
         <p id="holiday-emoji" v-if="holidayLoaded">{{emoji}}</p>
       </div>
       <div id="btn-container">
-        <button class="btn" @click="previousHoliday">Previous</button>
-        <button class="btn" @click="nextHoliday">Next</button>
+        <input type="button" class="btn" @click="previousHoliday" :disabled="holidayIndex == 0" value="Previous" />
+        <input type="button" class="btn" @click="nextHoliday" :disabled="holidayIndex == holidays.length - 1" value="Next" />
       </div>
     </div>
     <div id="btn-info" @click="showModal = !showModal">
@@ -96,6 +96,10 @@ export default {
 		showIndicators() {
 			let now = new Date();
 
+			now.setDate(new Date().getDate() + 14);
+			let twoWeeks = now.getTime();
+
+			now = new Date();
 			now.setMonth(new Date().getMonth() + 1);
 			let oneMonth = now.getTime();
 
@@ -106,9 +110,12 @@ export default {
 			let sixMonths = now.getTime();
 
 			// Holiday is less than a month away
-			if (oneMonth >= this.holidayDate.getTime()) {
+			if (twoWeeks >= this.holidayDate.getTime()) {
 				this.emoji = '😁';
 				this.bgColor = '#00796B';
+			} else if (oneMonth >= this.holidayDate.getTime()) {
+				this.emoji = '☹️';
+				this.bgColor = '#FFD54F';
 			} else if (threeMonths >= this.holidayDate.getTime()) {
 				this.emoji = '😭';
 				this.bgColor = '#F57C00';
@@ -185,6 +192,19 @@ p {
 	margin-left: 16px;
 	transition: 1s;
 	font-family: 'PlayFair Display', 'Arial';
+}
+
+.btn:disabled {
+	background-color: gray;
+	border-color: gray;
+	color: rgba(0, 0, 0, 0.4);
+	cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+	cursor: not-allowed;
+	background-color: gray;
+	color: rgba(0, 0, 0, 0.4);
 }
 
 .btn:hover {
