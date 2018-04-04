@@ -5,7 +5,7 @@
       <div>
         <p id="holiday-title" v-if="holidayLoaded">{{holidayTitle}}</p>
         <p id="holiday-date" v-if="holidayLoaded">{{holidayDateText}}</p>
-        <p id="holiday-emoji" v-if="holidayLoaded">{{emoji}}</p>
+        <img id="holiday-emoji" v-if="holidayLoaded" :src="emoji" />
       </div>
       <div id="btn-container">
         <input type="button" class="btn" @click="previousHoliday" :disabled="holidayIndex == 0" value="Previous" />
@@ -111,17 +111,17 @@ export default {
 
 			// Holiday is less than a month away
 			if (twoWeeks >= this.holidayDate.getTime()) {
-				this.emoji = '😁';
+				this.emoji = 'https://image.flaticon.com/icons/svg/777/777115.svg';
 				this.bgColor = '#00796B';
 			} else if (oneMonth >= this.holidayDate.getTime()) {
-				this.emoji = '☹️';
+				this.emoji = 'https://image.flaticon.com/icons/svg/777/777013.svg';
 				this.bgColor = '#FFD54F';
 			} else if (threeMonths >= this.holidayDate.getTime()) {
-				this.emoji = '😭';
+				this.emoji = 'https://image.flaticon.com/icons/svg/777/777024.svg';
 				this.bgColor = '#F57C00';
 			} else {
 				this.bgColor = '#E53935';
-				this.emoji = '😡';
+				this.emoji = 'https://image.flaticon.com/icons/svg/777/777012.svg';
 			}
 		},
 		previousHoliday() {
@@ -178,7 +178,7 @@ p {
 }
 
 #holiday-emoji {
-	font-size: 100px;
+	width: 100px;
 	margin-top: 40px;
 }
 
