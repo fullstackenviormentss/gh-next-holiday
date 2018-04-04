@@ -121,7 +121,7 @@ export default {
 				this.bgColor = '#F57C00';
 			} else {
 				this.bgColor = '#E53935';
-				this.emoji = '🤬';
+				this.emoji = '😡';
 			}
 		},
 		previousHoliday() {
